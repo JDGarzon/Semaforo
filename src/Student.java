@@ -11,6 +11,15 @@ class Student extends Thread {
     private Semaphore corridorSem;
     private Stack<Student> students;
 
+    /**
+     * Constructor de la clase Student.
+     * 
+     * @param id          Identificador del estudiante.
+     * @param monitor     Referencia al monitor.
+     * @param studentSem  Semáforo para controlar la espera del estudiante.
+     * @param corridorSem Semáforo para controlar el acceso al corredor.
+     * @param students    Pila de estudiantes en espera de ayuda.
+     */
     public Student(int id, Monitor monitor, Semaphore studentSem, Semaphore corridorSem, Stack<Student> students) {
         this.id = id;
         this.monitor = monitor;
@@ -19,6 +28,12 @@ class Student extends Thread {
         this.students = students;
     }
 
+    /**
+     * Método principal del hilo del estudiante.
+     * El estudiante simula el tiempo de programación y luego decide si esperar al
+     * monitor en el corredor
+     * o volver más tarde si no hay sillas disponibles.
+     */
     public void run() {
         try {
             while (true) {
